@@ -27,21 +27,21 @@ const SingleBikePage = () => {
     <Box component="pre">
       {JSON.stringify(bike, null, 4)}
       <Box sx={{ width: 700, height: 400, pl: 10 }}>
-      <Swiper
-        spaceBetween={50}
-        slidesPerView={1}
-        onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)}
-      >
-        {bike.images.map((img) => (
-          <SwiperSlide>
-            <Img src=(img) sx={{ width: 1, height: 1}} />
-          </SwiperSlide>
-        ))}
-        ...
-      </Swiper>
+        <Swiper
+          spaceBetween={50}
+          slidesPerView={1}
+          onSlideChange={() => console.log('slide change')}
+          onSwiper={(swiper) => console.log(swiper)}
+        >
+          {bike.images.map((img) => (
+            <SwiperSlide>
+              <Img src={img} sx={{ width: 1, height: 1 }} />
+            </SwiperSlide>
+          ))}
+          ...
+        </Swiper>
+      </Box>
     </Box>
-    </box>
   );
 };
 
