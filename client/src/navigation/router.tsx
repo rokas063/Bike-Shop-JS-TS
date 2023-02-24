@@ -15,7 +15,7 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: routes.SingleBikePage,
+        path: routes.SingleBikePage.path,
         element: <SingleBikePage />,
       },
     ],
