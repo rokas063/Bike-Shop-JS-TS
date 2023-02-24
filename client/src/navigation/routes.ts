@@ -1,5 +1,6 @@
 const routes = {
   HomePage: '/',
+  SingleBikePage: '/bike/:id',
 } as const;
 
 export type Routes = typeof routes;
