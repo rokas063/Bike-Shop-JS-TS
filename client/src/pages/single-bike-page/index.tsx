@@ -3,6 +3,8 @@ import { Box } from '@mui/material';
 import routes from 'navigation/routes';
 import { useParams, Navigate } from 'react-router-dom';
 import ApiService from 'services/api-service';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 const SingleBikePage = () => {
   const { id } = useParams();
