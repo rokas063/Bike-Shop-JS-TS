@@ -2,7 +2,7 @@ const singleBikePageRoot = '/bike/';
 
 const routes = {
   HomePage: '/',
-  BikeFormPage: '/create-bike',
+  BikesFormPage: '/create-bike',
   SingleBikePage: {
     path: `${singleBikePageRoot}:id`,
     createLink: (id: string | number) => `${singleBikePageRoot}${id}`,

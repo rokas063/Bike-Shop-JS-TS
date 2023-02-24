@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import NavbarLayout from 'components/layouts/navbar-layout';
 import HomePage from 'pages/home-page';
 import SingleBikePage from '../pages/single-bike-page/index';
-import BikeFormPage from './pages/BikeFormPage/index';
+import BikesFormPage from '../pages/bike-form-page/index';
 import routes from './routes';
 
 const router = createBrowserRouter([
@@ -16,8 +16,8 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: routes.BikeFormPage,
-        element: <BikeFormPage />,
+        path: routes.BikesFormPage,
+        element: <BikesFormPage />,
       },
       {
         path: routes.SingleBikePage.path,
