@@ -15,8 +15,15 @@ const fetchBikes = async () => {
   return response.data;
 };
 
+const fetchBike = async (id: string | number) => {
+  const response = await api.get<BikesModel>(`/bikes/${id}`);
+
+  return response.data;
+};
+
 const ApiService = {
   fetchBikes,
+  fetchBike,
 };
 
 export default ApiService;

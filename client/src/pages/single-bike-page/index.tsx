@@ -1,12 +1,28 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Box } from '@mui/material';
+import routes from 'navigation/routes';
+import { useParams, Navigate } from 'react-router-dom';
+import ApiService from 'services/api-service';
 
 const SingleBikePage = () => {
   const { id } = useParams();
+  const [bike, setBike] = React.useState<undefined | BikeModel>(undefined);
 
-  console.log(id);
+  React.useEffect(() => {
+    if (id !== undefined) {
+      (async () => {
+        const fetchedBike = await ApiService.fetchBike(id);
+        setBike(fetchedBike);
+      })();
+    }
+  }, []);
+
+  if (id === undefined) return <Navigate to={routes.HomePage} />;
+
   return (
-    <div>SingleBikePage</div>
+    <Box component="pre">
+      {JSON.stringify(bike, null, 4)}
+    </Box>
   );
 };
 
