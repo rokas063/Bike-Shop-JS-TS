@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Button, IconButton } from '@mui/material';
+import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import routes from 'navigation/routes';
 import { useParams, Navigate } from 'react-router-dom';
 import ApiService from 'services/api-service';
@@ -10,6 +11,7 @@ import Img from 'components/ui/img';
 const SingleBikePage = () => {
   const { id } = useParams();
   const [bike, setBike] = React.useState<undefined | BikeModel>(undefined);
+  const [swiper, setSwiper] = React.useState<any>(null);
 
   React.useEffect(() => {
     if (id !== undefined) {
@@ -23,23 +25,43 @@ const SingleBikePage = () => {
   if (id === undefined) return <Navigate to={routes.HomePage} />;
   if (bike === undefined) return null;
 
+  const handlePrevSlide = () => {
+    if (swiper !== null) {
+      swiper.slidePrev();
+    }
+  };
+
+  const handleNextSlide = () => {
+    if (swiper !== null) {
+      swiper.slideNext();
+    }
+  };
+
   return (
     <Box component="pre">
       {JSON.stringify(bike, null, 4)}
-      <Box sx={{ width: 700, height: 400, pl: 10 }}>
-        <Swiper
-          spaceBetween={50}
-          slidesPerView={1}
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => console.log(swiper)}
-        >
-          {bike.images.map((img) => (
-            <SwiperSlide>
-              <Img src={img} sx={{ width: 1, height: 1 }} />
-            </SwiperSlide>
-          ))}
-          ...
-        </Swiper>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <IconButton onClick={handlePrevSlide}>
+          <ArrowBack />
+        </IconButton>
+        <Box sx={{ width: 700, height: 400, pl: 10 }}>
+          <Swiper
+            spaceBetween={50}
+            slidesPerView={1}
+            onSlideChange={() => console.log('slide change')}
+            onSwiper={(swiper) => setSwiper(swiper)}
+          >
+            {bike.images.map((img) => (
+              <SwiperSlide>
+                <Img src={img} sx={{ width: 1, height: 1 }} />
+              </SwiperSlide>
+            ))}
+            ...
+          </Swiper>
+        </Box>
+        <IconButton onClick={handleNextSlide}>
+          <ArrowForward />
+        </IconButton>
       </Box>
     </Box>
   );
