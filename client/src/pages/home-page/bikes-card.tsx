@@ -24,14 +24,16 @@ const BikesCard: React.FC<BikesCardProps> = ({
   return (
     <Stack sx={{ boxShadow: 4 }}>
       <Img src={images[0]} alt="" sx={{ aspectRatio: '1.42', width: 1 }} />
-      <Styled.BikesCardContent>
+      <Styled.BikesCardContent sx={{ background: '#E8F4F8' }}>
         <Box sx={{ flexGrow: 1 }}>
           <Box sx={{ float: 'right', textAlign: 'right' }}>
-            <Box sx={{ fontSize: '1.3rem', color: 'primary.main', fontWeight: 600 }}>{price}</Box>
+            <Typography variant="subtitle1" sx={{ fontSize: '1rem', fontWeight: 600 }}>
+              {`${price} €`}
+            </Typography>
           </Box>
 
           <Typography sx={{ fontSize: '1.15rem', fontWeight: 500 }}>{title}</Typography>
-          <Typography variant="subtitle2">{`${location.country}, ${location.city}`}</Typography>
+          <Typography variant="subtitle2" sx={{ color: '#546E7A' }}>{`${location.country}, ${location.city}`}</Typography>
         </Box>
 
         <Button
@@ -40,10 +42,11 @@ const BikesCard: React.FC<BikesCardProps> = ({
           sx={{ mt: 3 }}
           onClick={() => navigate(routes.SingleBikePage.createLink(id))}
         >
-          Uzsisakyti
+          Užsisakyti
         </Button>
       </Styled.BikesCardContent>
     </Stack>
   );
 };
+
 export default BikesCard;

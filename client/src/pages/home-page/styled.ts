@@ -1,12 +1,19 @@
-import { styled, Stack } from '@mui/material';
+import { styled, Stack, Theme } from '@mui/material';
 
-export const BikesGrid = styled('div')(({ theme }) => ({
+interface BikesGridProps {
+  theme: Theme;
+}
+
+export const BikesGrid = styled('div')<BikesGridProps>(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: 'repeat(1, 1fr)',
   gap: theme.spacing(5),
   padding: theme.spacing(6),
   maxWidth: theme.breakpoints.values.xl,
   margin: 'auto',
+  border: `1px solid ${theme.palette.grey[300]}`,
+  borderRadius: theme.shape.borderRadius,
+  background: 'linear-gradient(to bottom, #6F00FF, #4B0082)',
   [theme.breakpoints.up('sm')]: {
     gridTemplateColumns: 'repeat(2, 1fr)',
   },
@@ -18,8 +25,42 @@ export const BikesGrid = styled('div')(({ theme }) => ({
   },
 }));
 
-export const BikesCardContent = styled(Stack)(({ theme }) => ({
+export const BikesCardContent = styled(Stack)<{ theme: Theme }>(({ theme }) => ({
   flexGrow: 1,
   width: '100%',
   padding: theme.spacing(2, 4, 3),
+  border: `1px solid ${theme.palette.grey[300]}`,
+  borderRadius: theme.shape.borderRadius,
+  boxShadow: `0px 0px 10px ${theme.palette.grey[300]}`,
+  transition: 'transform 0.2s ease-in-out',
+  '&:hover': {
+    transform: 'scale(1.05)',
+  },
+}));
+
+export const BikeCardImage = styled('img')({
+  width: '100%',
+  height: 'auto',
+  borderRadius: '4px 4px 0 0',
+});
+
+interface BikeCardNameProps {
+  theme: Theme;
+}
+
+export const BikeCardName = styled('h3')<BikeCardNameProps>(({ theme }) => ({
+  fontWeight: 'bold',
+  fontSize: '1.5rem',
+  lineHeight: '1.2',
+  color: theme.palette.primary.contrastText,
+}));
+
+interface BikeCardDescriptionProps {
+  theme: Theme;
+}
+
+export const BikeCardDescription = styled('p')<BikeCardDescriptionProps>(({ theme }) => ({
+  fontSize: '1rem',
+  lineHeight: '1.2',
+  color: theme.palette.primary.contrastText,
 }));
