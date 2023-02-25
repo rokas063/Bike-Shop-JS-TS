@@ -38,27 +38,45 @@ const SingleBikePage = () => {
   };
 
   return (
-    <Box component="pre">
-      {JSON.stringify(bike, null, 4)}
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Box sx={{
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+    }}
+    >
+      <Box sx={{
+        maxWidth: '80vw', width: 500, height: 300, pb: 2,
+      }}
+      >
+        <Swiper
+          spaceBetween={50}
+          slidesPerView={1}
+          onSlideChange={() => console.log('slide change')}
+          onSwiper={(swiper) => setSwiper(swiper)}
+        >
+          {bike.images.map((img) => (
+            <SwiperSlide key={img}>
+              <Img src={img} sx={{ width: '100%', height: '100%' }} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Box>
+      <Box sx={{ maxWidth: '80vw', px: 2 }}>
+        <Box sx={{
+          textAlign: 'center', fontSize: 24, fontWeight: 'bold', pb: 2,
+        }}
+        >
+          {bike.name}
+        </Box>
+        <Box sx={{ textAlign: 'justify', fontSize: 16 }}>
+          {bike.description}
+        </Box>
+      </Box>
+      <Box sx={{
+        display: 'flex', alignItems: 'center', justifyContent: 'center', pt: 2,
+      }}
+      >
         <IconButton onClick={handlePrevSlide}>
           <ArrowBack />
         </IconButton>
-        <Box sx={{ width: 700, height: 400, pl: 10 }}>
-          <Swiper
-            spaceBetween={50}
-            slidesPerView={1}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => setSwiper(swiper)}
-          >
-            {bike.images.map((img) => (
-              <SwiperSlide>
-                <Img src={img} sx={{ width: 1, height: 1 }} />
-              </SwiperSlide>
-            ))}
-            ...
-          </Swiper>
-        </Box>
         <IconButton onClick={handleNextSlide}>
           <ArrowForward />
         </IconButton>
