@@ -11,32 +11,51 @@ import {
 } from '@mui/material';
 import { Add, Delete } from '@mui/icons-material';
 
+type Image = {
+  id: number;
+  url: string;
+};
+
+type Product = {
+  title: string;
+  country: string;
+  city: string;
+  images: Image[];
+  price: string;
+};
+
 const BikesFormPage = () => {
   const [title, setTitle] = useState('');
   const [country, setCountry] = useState('');
   const [city, setCity] = useState('');
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<Image[]>([]);
   const [price, setPrice] = useState('');
 
   const handleAddImage = () => {
-    setImages([...images, '']);
+    const newImage = { id: images.length + 1, url: '' };
+    setImages([...images, newImage]);
   };
 
-  const handleDeleteImage = (index) => {
-    const newImages = [...images];
-    newImages.splice(index, 1);
+  const handleDeleteImage = (id: number) => {
+    const newImages = images.filter((image) => image.id !== id);
     setImages(newImages);
   };
 
-  const handleImageChange = (index, value) => {
-    const newImages = [...images];
-    newImages[index] = value;
+  const handleImageChange = (id: number, url: string) => {
+    const newImages = images.map((image) => (image.id === id ? { ...image, url } : image));
     setImages(newImages);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Vėliau
+    const product: Product = {
+      title,
+      country,
+      city,
+      images,
+      price,
+    };
+    console.log(product);
   };
 
   return (
@@ -75,25 +94,25 @@ const BikesFormPage = () => {
               onChange={(e) => setCity(e.target.value)}
               fullWidth
             />
-            {images.map((image, index) => (
+            {images.map((image) => (
               <Stack
-                key={index}
+                key={image.id}
                 direction="row"
                 alignItems="center"
                 spacing={1}
               >
                 <TextField
-                  label={`Image ${index + 1}`}
+                  label={`Image ${image.id}`}
                   variant="outlined"
-                  value={image}
-                  onChange={(e) => handleImageChange(index, e.target.value)}
+                  value={image.url}
+                  onChange={(e) => handleImageChange(image.id, e.target.value)}
                   fullWidth
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="Delete image"
-                          onClick={() => handleDeleteImage(index)}
+                          onClick={() => handleDeleteImage(image.id)}
                           size="large"
                         >
                           <Delete />
@@ -105,15 +124,15 @@ const BikesFormPage = () => {
               </Stack>
             ))}
             {images.length < 3 && (
-              <Box display="flex" justifyContent="center">
-                <IconButton
-                  aria-label="Add image"
-                  onClick={handleAddImage}
-                  size="large"
-                >
-                  <Add />
-                </IconButton>
-              </Box>
+            <Box display="flex" justifyContent="center">
+              <IconButton
+                aria-label="Add image"
+                onClick={handleAddImage}
+                size="large"
+              >
+                <Add />
+              </IconButton>
+            </Box>
             )}
             <TextField
               label="Price"
@@ -121,10 +140,15 @@ const BikesFormPage = () => {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               fullWidth
+              InputProps={{
+                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+              }}
             />
-            <Button type="submit" variant="contained" color="primary" fullWidth>
-              Create
-            </Button>
+            <Box display="flex" justifyContent="center">
+              <Button type="submit" variant="contained" color="primary">
+                Add Product
+              </Button>
+            </Box>
           </Stack>
         </form>
       </Paper>
