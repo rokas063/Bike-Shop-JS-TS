@@ -10,14 +10,14 @@ import {
   Button,
 } from '@mui/material';
 import { Add, Delete } from '@mui/icons-material';
+import { useNavigate, useParams } from 'react-router-dom';
+import useBikes from 'hooks/use-bikes';
+import ApiService from 'services/api-service';
+import routes from 'navigation/routes';
 import Helpers from './helpers';
 
-type Image = {
-  id: number;
-  url: string;
-};
-
-type Product = {
+type BikesModel = {
+  id: string;
   title: string;
   country: string;
   city: string;
@@ -25,52 +25,78 @@ type Product = {
   price: string;
 };
 
-const BikesFormPage = () => {
+type Image = {
+  id: number;
+  url: string;
+};
+
+type BikesFormPageProps = {
+  mode?: 'create' | 'update';
+};
+
+const BikesFormPage: React.FC<BikesFormPageProps> = ({ mode = 'create' }) => {
   const [title, setTitle] = useState('');
   const [country, setCountry] = useState('');
   const [city, setCity] = useState('');
-  const [images, setImages] = useState<Image[]>([]);
   const [price, setPrice] = useState('');
+  const [images, setImages] = useState<Image[]>([]);
+
+  const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
+  const bikes = useBikes(id);
+
+  const postBikesData = async (bikesData: Omit<BikesModel, 'id'>) => {
+    try {
+      await ApiService.createBikes(bikesData);
+      navigate(routes.HomePage);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const updateBikesData = async (id: string, bikesData: Omit<BikesModel, 'id'>) => {
+    try {
+      await ApiService.updateBikes(id, bikesData);
+      navigate(routes.HomePage);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+
+    try {
+      const values = {
+        title, country, city, images, price,
+      };
+      if (mode === 'create') {
+        postBikesData(values);
+      } else if (id !== undefined) {
+        updateBikesData(id, values);
+      }
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  };
 
   const handleAddImage = () => {
-    const newImage = { id: images.length + 1, url: '' };
-    setImages([...images, newImage]);
+    setImages([...images, { id: images.length, url: '' }]);
   };
 
   const handleDeleteImage = (id: number) => {
-    const newImages = images.filter((image) => image.id !== id);
-    setImages(newImages);
+    setImages(images.filter((image) => image.id !== id));
   };
 
   const handleImageChange = (id: number, url: string) => {
-    const newImages = images.map((image) => (image.id === id ? { ...image, url } : image));
-    setImages(newImages);
+    setImages(
+      images.map((image) => (image.id === id ? { ...image, url } : image)),
+    );
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const product: Product = {
-      title,
-      country,
-      city,
-      images,
-      price,
-    };
-
-    const titleError = Helpers.validateTitle(title);
-    const countryError = Helpers.validateCountry(country);
-    const cityError = Helpers.validateCity(city);
-    const imagesError = Helpers.validateImages(images);
-    const priceError = Helpers.validatePrice(price);
-
-    if (titleError || countryError || cityError || imagesError || priceError) {
-      console.log('Errors:', {
-        titleError, countryError, cityError, imagesError, priceError,
-      });
-    } else {
-      console.log('Product:', product);
-    }
-  };
+  if (mode === 'update' && bikes === undefined) {
+    return null;
+  }
 
   return (
     <Box
