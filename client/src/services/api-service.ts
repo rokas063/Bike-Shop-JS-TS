@@ -8,22 +8,22 @@ const ApiService = {
     return response.data;
   },
 
-  async fetchBike(id: string | number) {
+  async fetchBikes(id: string | number) {
     const response = await axios.get<BikesModel>(`${API_BASE_URL}/bikes/${id}`);
     return response.data;
   },
 
-  async createBike(bikeData: any) {
+  async createBikes(bikeData: any) {
     const response = await axios.post(`${API_BASE_URL}/bikes`, bikeData);
     return response.data;
   },
 
-  async updateBike(id: string | number, bikeData: any) {
+  async updateBikes(id: string | number, bikeData: any) {
     const response = await axios.put(`${API_BASE_URL}/bikes/${id}`, bikeData);
     return response.data;
   },
 
-  async deleteBike(id: string | number) {
+  async deleteBikes(id: string | number) {
     const response = await axios.delete(`${API_BASE_URL}/bikes/${id}`);
     return response.data;
   },
