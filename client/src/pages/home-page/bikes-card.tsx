@@ -15,7 +15,6 @@ type BikesCardProps = BikesModel;
 const BikesCard: React.FC<BikesCardProps> = ({
   id,
   title,
-  location,
   images,
   price,
 }) => {
@@ -33,7 +32,6 @@ const BikesCard: React.FC<BikesCardProps> = ({
           </Box>
 
           <Typography sx={{ fontSize: '1.15rem', fontWeight: 500 }}>{title}</Typography>
-          <Typography variant="subtitle2" sx={{ color: '#546E7A' }}>{`${location.country}, ${location.city}`}</Typography>
         </Box>
 
         <Button
