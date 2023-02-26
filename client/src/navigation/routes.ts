@@ -6,7 +6,10 @@ const routes = {
   SingleBikePage: {
     path: `${singleBikePageRoot}:id`,
     createLink: (id: string | number) => `${singleBikePageRoot}${id}`,
+    link: (id: string | number) => `${singleBikePageRoot}${id}`,
   },
+  EditBikesPage: '/edit-bikes/:id',
+  NotFoundPage: '*',
 } as const;
 
 export type Routes = typeof routes;

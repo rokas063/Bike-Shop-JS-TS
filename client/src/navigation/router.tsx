@@ -2,6 +2,7 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import NavbarLayout from 'components/layouts/navbar-layout';
 import HomePage from 'pages/home-page';
+import EditBikesPage from 'pages/bike-form-page/EditBikesPage';
 import SingleBikePage from '../pages/single-bike-page/index';
 import BikesFormPage from '../pages/bike-form-page/index';
 import routes from './routes';
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: routes.BikesFormPage,
         element: <BikesFormPage />,
+      },
+      {
+        path: routes.EditBikesPage,
+        element: <EditBikesPage />,
       },
       {
         path: routes.SingleBikePage.path,
