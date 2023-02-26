@@ -58,6 +58,17 @@ const SingleBikePage = () => {
             </SwiperSlide>
           ))}
         </Swiper>
+        <Box sx={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center', pt: 2,
+        }}
+        >
+          <IconButton onClick={handlePrevSlide}>
+            <ArrowBack />
+          </IconButton>
+          <IconButton onClick={handleNextSlide}>
+            <ArrowForward />
+          </IconButton>
+        </Box>
       </Box>
       <Box sx={{ maxWidth: '80vw', px: 2 }}>
         <Box sx={{
@@ -66,20 +77,14 @@ const SingleBikePage = () => {
         >
           {bike.name}
         </Box>
-        <Box sx={{ textAlign: 'justify', fontSize: 16 }}>
-          {bike.description}
+        <Box sx={{
+          display: 'flex', justifyContent: 'center', alignItems: 'center', height: 300,
+        }}
+        >
+          <Box sx={{ maxWidth: '80vw', textAlign: 'justify', fontSize: 16 }}>
+            {bike.description}
+          </Box>
         </Box>
-      </Box>
-      <Box sx={{
-        display: 'flex', alignItems: 'center', justifyContent: 'center', pt: 2,
-      }}
-      >
-        <IconButton onClick={handlePrevSlide}>
-          <ArrowBack />
-        </IconButton>
-        <IconButton onClick={handleNextSlide}>
-          <ArrowForward />
-        </IconButton>
       </Box>
     </Box>
   );

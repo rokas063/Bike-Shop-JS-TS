@@ -10,6 +10,7 @@ import {
   Button,
 } from '@mui/material';
 import { Add, Delete } from '@mui/icons-material';
+import Helpers from './helpers';
 
 type Image = {
   id: number;
@@ -55,7 +56,20 @@ const BikesFormPage = () => {
       images,
       price,
     };
-    console.log(product);
+
+    const titleError = Helpers.validateTitle(title);
+    const countryError = Helpers.validateCountry(country);
+    const cityError = Helpers.validateCity(city);
+    const imagesError = Helpers.validateImages(images);
+    const priceError = Helpers.validatePrice(price);
+
+    if (titleError || countryError || cityError || imagesError || priceError) {
+      console.log('Errors:', {
+        titleError, countryError, cityError, imagesError, priceError,
+      });
+    } else {
+      console.log('Product:', product);
+    }
   };
 
   return (
