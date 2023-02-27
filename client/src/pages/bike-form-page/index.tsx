@@ -21,7 +21,7 @@ type BikesModel = {
   title: string;
   country: string;
   city: string;
-  images: Image[];
+  images: any;
   price: string;
 };
 type BikesFormPageProps = {
@@ -75,17 +75,15 @@ const BikesFormPage: React.FC<BikesFormPageProps> = ({ mode = 'create' }) => {
   };
 
   const handleAddImage = () => {
-    setImages([...images, { id: images.length, url: '' }]);
+    setImages([...images, { }]);
   };
 
   const handleDeleteImage = (id: number) => {
     setImages(images.filter((image) => image.id !== id));
   };
 
-  const handleImageChange = (id: number, url: string) => {
-    setImages(
-      images.map((image) => (image.id === id ? { ...image, url } : image)),
-    );
+  const handleImageChange = (index, newImage) => {
+    setImages(images.map((image, i) => (i === index ? newImage : image)));
   };
 
   if (mode === 'update' && bikes === undefined) {
