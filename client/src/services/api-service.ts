@@ -2,7 +2,9 @@ import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:5024';
 
-type BikesModel = {
+export type Image = string;
+
+export type BikesModel = {
   id: string;
   title: string;
   country: string;
@@ -11,17 +13,7 @@ type BikesModel = {
   price: string;
 };
 
-type Image = {
-  id: number;
-  url: string;
-};
-
 const ApiService = {
-  async fetchBikesList() {
-    const response = await axios.get<BikesModel[]>(`${API_BASE_URL}/bikes`);
-    return response.data;
-  },
-
   async fetchBikesById(id: string | number) {
     const response = await axios.get<BikesModel>(`${API_BASE_URL}/bikes/${id}`);
     return response.data;
@@ -33,7 +25,7 @@ const ApiService = {
   },
 
   async updateBikes(id: string | number, bikesData: any) {
-    const response = await axios.put(`${API_BASE_URL}/bikes/${id}`, bikesData);
+    const response = await axios.put<BikesModel>(`${API_BASE_URL}/bikes/${id}`, bikesData);
     return response.data;
   },
 

@@ -7,8 +7,8 @@ interface BikesGridProps {
 export const BikesGrid = styled('div')<BikesGridProps>(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: 'repeat(1, 1fr)',
-  gap: theme.spacing(5),
-  padding: theme.spacing(6),
+  gap: theme.spacing(3),
+  padding: theme.spacing(5),
   maxWidth: theme.breakpoints.values.xl,
   margin: 'auto',
   border: `1px solid ${theme.palette.grey[300]}`,
@@ -28,7 +28,7 @@ export const BikesGrid = styled('div')<BikesGridProps>(({ theme }) => ({
 export const BikesCardContent = styled(Stack)<{ theme: Theme }>(({ theme }) => ({
   flexGrow: 1,
   width: '100%',
-  padding: theme.spacing(2, 4, 3),
+  padding: theme.spacing(3, 4, 3),
   border: `1px solid ${theme.palette.grey[300]}`,
   borderRadius: theme.shape.borderRadius,
   boxShadow: `0px 0px 10px ${theme.palette.grey[300]}`,
@@ -36,6 +36,7 @@ export const BikesCardContent = styled(Stack)<{ theme: Theme }>(({ theme }) => (
   '&:hover': {
     transform: 'scale(1.05)',
   },
+  background: theme.palette.primary.main,
 }));
 
 export const BikeCardImage = styled('img')({

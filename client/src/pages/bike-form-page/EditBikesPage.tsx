@@ -28,13 +28,13 @@ const EditBikesPage = () => {
 
     ApiService.updateBikes(id, formData)
       .then(() => {
-        history.push(routes.HomePage);
+        window.location.href = routes.HomePage;
       })
       .catch(console.error);
   };
 
   const handleUpdateButtonClick = () => {
-    formRef.current?.submit();
+    formRef.current?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
   };
 
   if (!bike) return null;
@@ -75,11 +75,14 @@ const EditBikesPage = () => {
             <Button variant="contained" onClick={handleAddImageField} fullWidth>
               Add Image Field
             </Button>
-            <Button variant="contained" onClick={handleUpdateButtonClick} fullWidth>
+            <Button variant="contained" type="submit" fullWidth>
               Update Bike
             </Button>
           </Stack>
         </form>
+        <Button variant="contained" onClick={() => window.location.href = routes.HomePage} fullWidth sx={{ mt: 2 }}>
+          Cancel
+        </Button>
       </Paper>
     </Box>
   );

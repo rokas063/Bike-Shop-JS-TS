@@ -24,12 +24,6 @@ type BikesModel = {
   images: Image[];
   price: string;
 };
-
-type Image = {
-  id: number;
-  url: string;
-};
-
 type BikesFormPageProps = {
   mode?: 'create' | 'update';
 };

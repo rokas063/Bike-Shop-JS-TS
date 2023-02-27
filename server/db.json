@@ -1,40 +1,10 @@
 {
   "bikes": [
     {
-      "id": "1",
-      "title": "Kalnų dviratis GUST SPARK 26",
-      "location": {
-        "country": "Latvija",
-        "city": "Ryga"
-      },
-      "images": [
-        "https://lt2.pigugroup.eu/colours/616/453/49/61645349/kalnu-dviratis-gust-spark-26-camo-de32c_xbig.jpg",
-        "https://lt2.pigugroup.eu/colours/616/453/49/61645349/kalnu-dviratis-gust-spark-26-camo-39368-kaina_xbig.jpg",
-        "https://lt2.pigugroup.eu/colours/616/453/49/61645349/kalnu-dviratis-gust-spark-26-camo-aeec7-internetu_xbig.jpg"
-      ],
-      "price": "279"
-    },
-    {
-      "id": "2",
-      "title": "Kalnų dviratis AIST ROCKY Disc 1.0",
-      "location": {
-        "country": "Suomija",
-        "city": "Helsinkis"
-      },
-      "images": [
-        "https://lt2.pigugroup.eu/colours/617/444/04/61744404/aist-rocky-disc-10-26cll-greyblue-ee91c_xbig.jpg",
-        "https://lt2.pigugroup.eu/colours/617/444/04/61744404/aist-rocky-disc-10-26cll-greyblue-df614-kaina_xbig.jpg",
-        "https://lt2.pigugroup.eu/colours/617/444/04/61744404/aist-rocky-disc-10-26cll-greyblue-35c2f-internetu_xbig.jpg"
-      ],
-      "price": "310"
-    },
-    {
       "id": "3",
       "title": "Kalnų dviratis Cube Aim Race 29",
-      "location": {
-        "country": "Kanada",
-        "city": "Toronto"
-      },
+      "country": "Kanada",
+      "city": "Toronto",
       "images": [
         "https://lt2.pigugroup.eu/colours/524/101/09/52410109/kalnu-dviratis-cube-aim-race-29-2022-3bcec_xbig.jpg",
         "https://lt2.pigugroup.eu/colours/524/101/09/52410109/kalnu-dviratis-cube-aim-race-29-2022-d7464-kaina_xbig.jpg",
@@ -45,10 +15,8 @@
     {
       "id": "4",
       "title": "Vaikų dviratis N1 Junior 1.0 24",
-      "location": {
-        "country": "Olandija",
-        "city": "Amsterdamas"
-      },
+      "country": "Olandija",
+      "city": "Amsterdamas",
       "images": [
         "https://lt2.pigugroup.eu/colours/444/740/03/44474003/vaiku-dviratis-n1-junior-10-24-sviesiai-0f7e5-internetu_xbig.jpg",
         "https://lt2.pigugroup.eu/colours/444/740/03/44474003/vaiku-dviratis-n1-junior-10-24-sviesiai-a1f84-kaina_xbig.jpg",
@@ -59,10 +27,8 @@
     {
       "id": "5",
       "title": "DVIRATIS 29 MTB JUODAS",
-      "location": {
-        "country": "Lietuva",
-        "city": "Vilnius"
-      },
+      "country": "Lietuva",
+      "city": "Vilnius",
       "images": [
         "https://lt2.pigugroup.eu/colours/561/874/54/56187454/dviratis-coppi-29-8001446124673-juodaszalias-549d4_xbig.jpg",
         "https://lt2.pigugroup.eu/colours/561/874/54/56187454/dviratis-coppi-29-8001446124673-juodaszalias-4db1f-kaina_xbig.jpg",
@@ -73,10 +39,8 @@
     {
       "id": "6",
       "title": "Kalnų dviratis GUST PRIZM 29cll, 17",
-      "location": {
-        "country": "Latvija",
-        "city": "Liepaja"
-      },
+      "country": "Latvija",
+      "city": "Liepaja",
       "images": [
         "https://lt2.pigugroup.eu/colours/617/600/79/61760079/gust-prizm-29cll-66a39_xbig.jpg",
         "https://lt2.pigugroup.eu/colours/617/600/79/61760079/gust-prizm-29cll-7dfbe-kaina_xbig.jpg",
@@ -87,10 +51,8 @@
     {
       "id": "7",
       "title": "Kalnų dviratis Cube Aim Pro 29",
-      "location": {
-        "country": "Latvija",
-        "city": "Ezere"
-      },
+      "country": "Latvija",
+      "city": "Ezere",
       "images": [
         "https://lt2.pigugroup.eu/colours/469/106/83/46910683/kalnu-dviratis-cube-aim-pro-29-2022-fa74c_xbig.jpg",
         "https://lt2.pigugroup.eu/colours/469/106/83/46910683/kalnu-dviratis-cube-aim-pro-29-2022-e0a5f-kaina_xbig.jpg",
@@ -101,10 +63,8 @@
     {
       "id": "8",
       "title": "Kalnų dviratis Roy Roxter Red 29",
-      "location": {
-        "country": "Lietuva",
-        "city": "Kaunas"
-      },
+      "country": "Lietuva",
+      "city": "Kaunas",
       "images": [
         "https://lt2.pigugroup.eu/colours/620/627/39/62062739/roy-roxter-red-29-0337a_xbig.jpg",
         "https://lt2.pigugroup.eu/colours/620/627/39/62062739/roy-roxter-red-29-7afd6-kaina_xbig.jpg",
@@ -115,10 +75,8 @@
     {
       "id": "9",
       "title": "Kalnų dviratis Corelli Zoi 2.2",
-      "location": {
-        "country": "Kinija",
-        "city": "Hong Kong"
-      },
+      "country": "Kinija",
+      "city": "Hong Kong",
       "images": [
         "https://lt2.pigugroup.eu/colours/496/505/84/49650584/kalnu-dviratis-corelli-zoi-22-hd-29-562ff-uzsakyti_xbig.jpg",
         "https://lt2.pigugroup.eu/colours/496/505/84/49650584/kalnu-dviratis-corelli-zoi-22-hd-29-dce32-pirkti_xbig.jpgv",
@@ -129,10 +87,8 @@
     {
       "id": "10",
       "title": "BMX dviratis Radio Revo",
-      "location": {
-        "country": "Italija",
-        "city": "Venecija"
-      },
+      "country": "Italija",
+      "city": "Venecija",
       "images": [
         "https://lt2.pigugroup.eu/colours/544/463/58/54446358/bmx-dviratis-radio-revo-16-2021-juodas-3ea34_xbig.jpg",
         "https://lt2.pigugroup.eu/colours/544/463/58/54446358/bmx-dviratis-radio-revo-16-2021-juodas-bb807-kaina_xbig.jpg",
@@ -143,10 +99,8 @@
     {
       "id": "11",
       "title": "Kalnų dviratis Corelli Zoi 1.0",
-      "location": {
-        "country": "Jungtine Karalyste",
-        "city": "Londonas"
-      },
+      "country": "Jungtine Karalyste",
+      "city": "Londonas",
       "images": [
         "https://lt2.pigugroup.eu/colours/551/291/14/55129114/kalnu-dviratis-corelli-zoi-10-26-juodasgeltonas-71382-pigiau_xbig.jpg",
         "https://lt2.pigugroup.eu/colours/551/291/14/55129114/kalnu-dviratis-corelli-zoi-10-26-juodasgeltonas-7d1f9-internetu_xbig.jpg",
@@ -157,10 +111,8 @@
     {
       "id": "12",
       "title": "Vyriškas kalnų dviratis Louke 1",
-      "location": {
-        "country": "Danija",
-        "city": "Kopenhaga"
-      },
+      "country": "Danija",
+      "city": "Kopenhaga",
       "images": [
         "https://lt2.pigugroup.eu/colours/158/259/15/15825915/448ec9d2e84079dcd725eb9ab9789ea7_xbig.jpg",
         "https://lt2.pigugroup.eu/colours/158/259/15/15825915/998b0a54ba7c1bfe893c24ba745d9643_xbig.jpg",

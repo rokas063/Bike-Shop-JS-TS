@@ -5,19 +5,19 @@ import routes from 'navigation/routes';
 import { useParams, Navigate } from 'react-router-dom';
 import ApiService from 'services/api-service';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
 import Img from 'components/ui/img';
+import 'swiper/css';
 
 const SingleBikePage = () => {
   const { id } = useParams();
-  const [bike, setBike] = React.useState<undefined | BikeModel>(undefined);
-  const [swiper, setSwiper] = React.useState<any>(null);
+  const [bike, setBikes] = React.useState<undefined | BikesModel>(undefined);
+  const [swiper, setSwiper] = React.useState<Swiper | null>(null);
 
   React.useEffect(() => {
     if (id !== undefined) {
       (async () => {
-        const fetchedBike = await ApiService.fetchBike(id);
-        setBike(fetchedBike);
+        const fetchedBikes = await ApiService.fetchBikesById(id);
+        setBikes(fetchedBikes);
       })();
     }
   }, []);

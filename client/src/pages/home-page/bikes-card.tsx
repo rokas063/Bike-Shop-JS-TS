@@ -5,7 +5,10 @@ import {
   Stack,
   Button,
   IconButton,
-  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from '@mui/material';
 import Img from 'components/ui/img';
 import { useNavigate } from 'react-router-dom';
@@ -15,23 +18,15 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ApiService from 'services/api-service';
 import * as Styled from './styled';
 
-type EditButtonConfig = {
-  show: boolean;
-  onClick: () => void;
-  color?: 'inherit' | 'primary' | 'secondary' | 'default';
-};
-
-type BikesCardProps = {
+interface BikesCardProps {
   id: string;
   title: string;
   country: string;
   city: string;
   images: string[];
   price: number;
-  onEditClick: () => void;
   onDeleteClick: () => void;
-  editButtonConfig?: EditButtonConfig;
-};
+}
 
 const BikesCard: React.FC<BikesCardProps> = ({
   id,
@@ -40,93 +35,33 @@ const BikesCard: React.FC<BikesCardProps> = ({
   city,
   images,
   price,
-  onEditClick,
   onDeleteClick,
-  editButtonConfig,
 }) => {
   const navigate = useNavigate();
-  const [editing, setEditing] = useState(false);
-  const [newTitle, setNewTitle] = useState(title);
-  const [newCountry, setNewCountry] = useState(country);
-  const [newCity, setNewCity] = useState(city);
-  const [newPrice, setNewPrice] = useState(price);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   const handleEditClick = () => {
-    onEditClick();
-    setEditing(true);
+    navigate(`${routes.EditBikesPage.replace(':id', id)}`);
   };
 
-  const handleSaveClick = async () => {
-    try {
-      await ApiService.updateBikes(id, {
-        title: newTitle,
-        country: newCountry,
-        city: newCity,
-        price: newPrice,
-      });
-      setEditing(false);
-    } catch (error) {
-      console.error(error);
-    }
+  const handleDeleteClick = () => {
+    setIsDeleteDialogOpen(true);
   };
 
-  const handleCancelClick = () => {
-    setEditing(false);
-    setNewTitle(title);
-    setNewCountry(country);
-    setNewCity(city);
-    setNewPrice(price);
-  };
-
-  const handleDeleteClick = async () => {
+  const handleDeleteConfirm = async () => {
     try {
       await ApiService.deleteBikes(id);
+      setIsDeleteDialogOpen(false);
       onDeleteClick();
     } catch (error) {
       console.error(error);
     }
   };
 
-  const renderEditForm = () => (
-    <Box>
-      <TextField
-        label="Title"
-        variant="outlined"
-        fullWidth
-        value={newTitle}
-        onChange={(e) => setNewTitle(e.target.value)}
-      />
-      <TextField
-        label="Country"
-        variant="outlined"
-        fullWidth
-        value={newCountry}
-        onChange={(e) => setNewCountry(e.target.value)}
-      />
-      <TextField
-        label="City"
-        variant="outlined"
-        fullWidth
-        value={newCity}
-        onChange={(e) => setNewCity(e.target.value)}
-      />
-      <TextField
-        label="Price"
-        variant="outlined"
-        fullWidth
-        value={newPrice}
-        onChange={(e) => setNewPrice(Number(e.target.value))}
-      />
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
-        <Button variant="outlined" color="primary" onClick={handleSaveClick}>
-          Save
-        </Button>
-        <Button variant="outlined" color="error" onClick={handleCancelClick}>
-          Cancel
-        </Button>
-      </Box>
-    </Box>
-  );
+  const handleDeleteCancel = () => {
+    setIsDeleteDialogOpen(false);
+  };
+
   return (
     <Stack sx={{ boxShadow: 4 }}>
       <Img src={images[0]} alt="" sx={{ aspectRatio: '1.42', width: 1 }} />
@@ -156,6 +91,22 @@ const BikesCard: React.FC<BikesCardProps> = ({
           Užsisakyti
         </Button>
       </Styled.BikesCardContent>
+
+      <Dialog open={isDeleteDialogOpen} onClose={handleDeleteCancel}>
+        <DialogTitle>Ar tikrai norite ištrinti šį įrašą?</DialogTitle>
+        <DialogContent>
+          <Typography>{`Pavadinimas: ${title}`}</Typography>
+          <Typography>{`Kaina: ${price} €`}</Typography>
+          <Typography>{`Šalis: ${country}`}</Typography>
+          <Typography>{`Miestas: ${city}`}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteCancel}>Atšaukti</Button>
+          <Button onClick={handleDeleteConfirm} variant="contained" color="error">
+            Ištrinti
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Stack>
   );
 };
