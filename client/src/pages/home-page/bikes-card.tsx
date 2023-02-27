@@ -5,28 +5,16 @@ import {
   Stack,
   Button,
   IconButton,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
+  TextField,
 } from '@mui/material';
 import Img from 'components/ui/img';
+import EditBikesPage from 'pages/bike-form-page/EditBikesPage';
 import { useNavigate } from 'react-router-dom';
 import routes from 'navigation/routes';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ApiService from 'services/api-service';
 import * as Styled from './styled';
-
-interface BikesCardProps {
-  id: string;
-  title: string;
-  country: string;
-  city: string;
-  images: string[];
-  price: number;
-  onDeleteClick: () => void;
-}
 
 const BikesCard: React.FC<BikesCardProps> = ({
   id,
@@ -38,29 +26,55 @@ const BikesCard: React.FC<BikesCardProps> = ({
   onDeleteClick,
 }) => {
   const navigate = useNavigate();
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [deleted, setDeleted] = useState(false);
 
   const handleEditClick = () => {
     navigate(`${routes.EditBikesPage.replace(':id', id)}`);
   };
 
-  const handleDeleteClick = () => {
-    setIsDeleteDialogOpen(true);
-  };
-
-  const handleDeleteConfirm = async () => {
+  const handleDeleteClick = async () => {
     try {
+      const post = {
+        id,
+        title,
+        country,
+        city,
+        images,
+        price,
+      };
+
+      localStorage.setItem('deletedPost', JSON.stringify(post));
       await ApiService.deleteBikes(id);
-      setIsDeleteDialogOpen(false);
+      setDeleted(true);
       onDeleteClick();
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleDeleteCancel = () => {
-    setIsDeleteDialogOpen(false);
+  const handleRestoreClick = async () => {
+    try {
+      const post = JSON.parse(localStorage.getItem('deletedPost') || '');
+      await ApiService.createBikes(post);
+      localStorage.removeItem('deletedPost');
+      setDeleted(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  if (deleted) {
+    return (
+      <Box sx={{ p: 2 }}>
+        <Typography variant="h6" gutterBottom sx={{ mb: 2 }}>
+          Post deleted
+        </Typography>
+        <Button variant="contained" onClick={handleRestoreClick}>
+          Restore post
+        </Button>
+      </Box>
+    );
+  }
 
   return (
     <Stack sx={{ boxShadow: 4 }}>
@@ -91,22 +105,6 @@ const BikesCard: React.FC<BikesCardProps> = ({
           Užsisakyti
         </Button>
       </Styled.BikesCardContent>
-
-      <Dialog open={isDeleteDialogOpen} onClose={handleDeleteCancel}>
-        <DialogTitle>Ar tikrai norite ištrinti šį įrašą?</DialogTitle>
-        <DialogContent>
-          <Typography>{`Pavadinimas: ${title}`}</Typography>
-          <Typography>{`Kaina: ${price} €`}</Typography>
-          <Typography>{`Šalis: ${country}`}</Typography>
-          <Typography>{`Miestas: ${city}`}</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDeleteCancel}>Atšaukti</Button>
-          <Button onClick={handleDeleteConfirm} variant="contained" color="error">
-            Ištrinti
-          </Button>
-        </DialogActions>
-      </Dialog>
     </Stack>
   );
 };
