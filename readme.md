@@ -1,3 +1,13 @@
+Programming languages: JS,TS,JSDOM
+
+In this bike shop you can add information, pictures. 
+
+Delete, edit items.
+
+
+
+
+
 # React CRUD Application
 List of requirements and installation settings to successfully use the application;
 
